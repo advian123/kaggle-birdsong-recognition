@@ -2,22 +2,21 @@ from ignite.metrics import Metric
 from ignite.exceptions import NotComputableError
 from ignite.metrics.metric import sync_all_reduce, reinit__is_reduced
 import torch
-from sklearn.metrics import f1_score
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score, classification_report, confusion_matrix
 
-
-class CustomF1Score(Metric):
+class CustomAccScore(Metric):
     def __init__(self, threshold=0.5, output_transform=lambda x: x):
         self._score = None
         self.sigmoid = torch.nn.Sigmoid()
         self._num_items = None
         self.threshold = threshold
-        super(CustomF1Score, self).__init__(output_transform=output_transform)
+        super(CustomAccScore, self).__init__(output_transform=output_transform)
 
     @reinit__is_reduced
     def reset(self):
         self._score = 0.0
         self._num_items = 0
-        super(CustomF1Score, self).reset()
+        super(CustomAccScore, self).reset()
 
     @reinit__is_reduced
     def update(self, output):
@@ -31,11 +30,11 @@ class CustomF1Score(Metric):
         for i, (p, t) in enumerate(zip(pred,target)):
             if t.sum()==0.0:
                 if ((p>=self.threshold).sum())>0.0:
-                    score = f1_score([1], [0], average='micro')
+                    score = accuracy_score([1], [0], average='micro')
                 else:
-                    score = f1_score([1], [1], average='micro')
+                    score = accuracy_score([1], [1], average='micro')
             else:
-                score = f1_score([t], [p>=self.threshold], average='micro')
+                score = accuracy_score([t], [p>=self.threshold], average='micro')
             self._score += score
             self._num_items +=1
 
