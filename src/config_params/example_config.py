@@ -10,7 +10,7 @@ class Parameters(object):
         
         self.aug_name = "secondary_default"
         self.apply_mixup = False
-        self.model_name = "sed_dense121att"
+        self.model_name = "sed_dense169att"
 
         self.model_config =  {
             "sample_rate": 32000,
@@ -90,7 +90,7 @@ class Parameters(object):
         self.train_num_workers = 8
         self.valid_bs = 32
         self.valid_num_workers = 4
-        self.metrics = ["lraps", "f1score_clip", "f1score_frame"]
+        self.metrics = ["lraps", "f1score_clip", "f1score_frame","prescore_clip","accscore_clip"]
         
         self.track_metric = "f1score_clip"
         self.metric_factor = 1
