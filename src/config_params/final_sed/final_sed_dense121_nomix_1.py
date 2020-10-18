@@ -89,7 +89,7 @@ class Parameters(object):
         self.train_num_workers = 8
         self.valid_bs = 32
         self.valid_num_workers = 4
-        self.metrics = ["lraps", "f1score_clip", "f1score_frame"]
+        self.metrics = ["lraps", "f1score_clip", "f1score_frame","prescore_clip","accscore_clip"]
         
         self.track_metric = "lraps"
         self.metric_factor = 1
