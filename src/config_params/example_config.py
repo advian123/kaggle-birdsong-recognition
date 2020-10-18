@@ -10,7 +10,7 @@ class Parameters(object):
         
         self.aug_name = "secondary_default"
         self.apply_mixup = False
-        self.model_name = "sed_dense169att"
+        self.model_name = "sed_dense121att"
 
         self.model_config =  {
             "sample_rate": 32000,
